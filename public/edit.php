@@ -123,7 +123,6 @@ if(isset($_POST['submit'])) {
             $update_message .= '<p>There was a problem updating the manga: '.$connection->error.'</p>';
         } else {
             $message .= "<p>$user_title updated successfully!</p>";
-            // echo '<p>SQL Query: '.$update_query.'</p>';
         }
 
         $manga_id = "";

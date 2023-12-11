@@ -80,7 +80,6 @@ if (isset($_POST['submit'])) {
             $file_size = $_FILES['img-file']['size'];
             $file_error = $_FILES['img-file']['error'];
 
-            // grab the uploaded file's extension.
             $file_extension = explode('.', $file_name);
             $file_extension = strtolower(end($file_extension));
 
@@ -90,7 +89,6 @@ if (isset($_POST['submit'])) {
                 $file_name_new = uniqid('', true) . "." . $file_extension;
                 $file_destination = 'images/full/' . $file_name_new;
 
-                // Check to see if the directory exists; if not, make it.
                 if (!is_dir('images/full/')) {
                     mkdir('images/full/', 0777, true);
                 }
@@ -99,12 +97,9 @@ if (isset($_POST['submit'])) {
                     mkdir('images/thumbs/', 0777, true);
                 }
 
-                // Check if the file already exists
                 if (!file_exists($file_destination)) {
-                    // Move the uploaded file to the directory.
                     move_uploaded_file($file_temp_name, $file_destination);
 
-                    // Check the image dimensions. 
                     list($width_original, $height_original) = getimagesize($file_destination);
 
                     $resizedWidth = 750;
@@ -114,14 +109,11 @@ if (isset($_POST['submit'])) {
 
                     $thumb = imagecreatetruecolor(256, 256);
 
-                    // Calculate the shorter side / smaller size between width and height.
                     $smaller_size = min($width_original, $height_original);
 
-                    // Calculate the starting point for cropping the image.
                     $x_coordinate = ($width_original > $smaller_size) ? ($width_original - $smaller_size) / 2 : 0;
                     $y_coordinate = ($height_original > $smaller_size) ? ($height_original - $smaller_size) / 2 : 0;
 
-                    // Create image based on the filetype we grabbed earlier.
                     switch ($file_extension) {
                         case 'jpeg':
                         case 'jpg':
@@ -134,12 +126,11 @@ if (isset($_POST['submit'])) {
                             $src_image = imagecreatefromwebp($file_destination);
                             break;
                         default:
-                            // Invalid Type
+
                             $message .= "<p>This file type is not supported.</p>";
                             exit;
                     }
 
-                    // Resize the image
                     imagecopyresampled($resizedImage, $src_image, 0, 0, 0, 0, $resizedWidth, $resizedHeight, $width_original, $height_original);
 
                     imagejpeg($resizedImage, 'images/full_resized/' . $file_name_new, 100);

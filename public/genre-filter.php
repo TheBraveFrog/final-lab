@@ -8,22 +8,26 @@ include('includes/header.php');
 
 $filters = [
     "genre" => [
-        "Shounen" => "1950's-1960's",
-        "Seinen" => "1960's-1970's",
-        "Shojo" => "1970's-1980's",
-        "1980-1990" => "1980's-1990's",
-        "1990-2000" => "1990's-2000's",
-        "2000-2010" => "2000's-2010's",
+        'Action' => 'Action',
+        'Adventure' => 'Adventure',
+        'Coming-of-age' => 'Coming-of-age',
+        'Drama' => 'Drama',
+        'Fantasy' => 'Fantasy',
+        'Horror' => 'Horror',
+        'Mystery' => 'Mystery',
+        'Romance' => 'Romance',
+        'Seinen' => 'Seinen',
+        'Shounen' => 'Shounen',
+        'Sports' => 'Sports',
     ],
 ];
-
 
 $active_filters = [];
 foreach ($_GET as $filter => $values) {
     if (!is_array($values)) {
         $values = [$values];
     }
-    $active_filters[$filter] = array_map("htmlspecialchars", $values); 
+    $active_filters[$filter] = array_map("htmlspecialchars", $values);
 }
 
 ?>
@@ -34,7 +38,7 @@ foreach ($_GET as $filter => $values) {
             <h2 class="display-5">Filter the Data</h2>
             <p class="mb-5">Select any combination of the buttons below to filters the data.</p>
 
-           <?php
+            <?php
 
             foreach ($filters as $filter => $options) {
                 $heading = ucwords(str_replace(["_", "-"], " ", $filter));
@@ -79,7 +83,7 @@ foreach ($_GET as $filter => $values) {
                 echo "</div>";
             }
 
-            if (!empty($active_filters)) : ?>
+            if (!empty($active_filters)): ?>
                 <hr>
                 <div class="row">
                     <?php include("includes/filter_results.php"); ?>

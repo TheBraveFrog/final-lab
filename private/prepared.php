@@ -15,5 +15,6 @@ $select_statement = $connection->prepare("SELECT * FROM manga_data;");
 // specific select
 $specific_select_statement = $connection->prepare("SELECT * FROM manga_data WHERE manga_id = ?;");
 
-
+// search
+$search_query = isset($_GET['search']) ? $_GET['search'] : '';
 ?>

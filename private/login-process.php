@@ -30,7 +30,6 @@ if (isset($_POST['login'])) {
 
                     $_SESSION['login_expires'] = strtotime("+1 day midnight");
 
-                    // Redirect the user
                     header("Location: index.php");
                 } else {
                     $message = "<p class=\"text-warning\">Invalid username or password.</p>";

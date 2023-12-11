@@ -38,7 +38,7 @@ if (isset($_SESSION['username']) && isset($_POST['add_to_list']) && isset($_POST
                     $list_stmt->bind_param("iisss", $user_id, $manga_id, $title, $writer, $image_filename);
 
                     if ($list_stmt->execute()) {
-                        echo "Manga added to the list successfully!";
+                        (header('Location: view_list.php'));
                     } else {
                         echo "Error adding manga to the list: " . $list_stmt->error;
                     }

@@ -90,6 +90,9 @@ $manga_id = $_GET['manga_id'] ? $_GET['manga_id'] : "No Manga";
                                         <span class="fw-bold">Rating</span>:
                                         <?php echo $row['rating']; ?>
                                     </p>
+
+                                    <button class="btn btn-primary" type='submit' name='add_to_list'>Add to List</button>
+
                                 </div>
                             </div>
 

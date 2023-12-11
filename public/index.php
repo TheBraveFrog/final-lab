@@ -116,7 +116,7 @@ $offset = $per_page * ($current_page - 1);
                             <td><a href=\"view.php?manga_id=".urlencode($manga_id)."\">View More</a></td>
                             <form method='post' action='add_to_list.php'>
                             <input type='hidden' name='manga_id' value='$manga_id'>
-                            <td><button type='submit' name='add_to_list'>Add to List</button></td>
+                            <td><button class= 'btn btn-primary' type='submit' name='add_to_list'>Add to List</button></td>
                             </form>
                         </tr>";
 
@@ -157,7 +157,7 @@ $offset = $per_page * ($current_page - 1);
                     <td><a href=\"view.php?manga_id=".urlencode($manga_id)."\">View More</a></td>
                     <form method='post' action='add_to_list.php'>
                     <input type='hidden' name='manga_id' value='$manga_id'>
-                    <td><button type='submit' name='add_to_list'>Add to List</button></td>
+                    <td><button class='btn btn-primary' type='submit' name='add_to_list'>Add to List</button></td>
                   </form>
             
                     </tr>";
