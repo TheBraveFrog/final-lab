@@ -9,6 +9,8 @@ include('../private/prepared.php');
 
 $title_search = isset($_GET['title-search']) ? $_GET['title-search'] : '';
 $writer_search = isset($_GET['writer-search']) ? $_GET['writer-search'] : '';
+$search_query = isset($_GET['search']) ? $_GET['search'] : '';
+
 
 $genre = isset($_GET['genre']) ? $_GET['genre'] : [];
 $publisher = isset($_GET['publisher']) ? $_GET['publisher'] : [];
@@ -39,18 +41,9 @@ if (isset($_GET['submit'])) {
         $types .= 's';
     }
 
-    // publisher
-    if (!empty($publisher)) {
-        $placeholders = implode(',', array_fill(0, count($publisher), '?'));
-        $query .= " AND publisher IN ($placeholders)";
-        foreach ($publisher as $cont) {
-            $parameters[] = $cont;
-            $types .= 's';
-        }
-    }
-
-    // genre
-    if (!empty($genre)) {
+    // Genre
+if (!empty($genre)) {
+    if (!in_array('', $genre)) {
         $placeholders = implode(',', array_fill(0, count($genre), '?'));
         $query .= " AND genre IN ($placeholders)";
         foreach ($genre as $cont) {
@@ -58,6 +51,19 @@ if (isset($_GET['submit'])) {
             $types .= 's';
         }
     }
+}
+
+// Publisher
+if (!empty($publisher)) {
+    if (!in_array('', $publisher)) {
+        $placeholders = implode(',', array_fill(0, count($publisher), '?'));
+        $query .= " AND publisher IN ($placeholders)";
+        foreach ($publisher as $cont) {
+            $parameters[] = $cont;
+            $types .= 's';
+        }
+    }
+}
 
     if ($statement = $connection->prepare($query)) {
         if ($types) {
@@ -112,7 +118,49 @@ echo '<form action="'.htmlspecialchars($_SERVER['PHP_SELF']).'" method="GET" cla
             </div>
         </fieldset>
 
-        <!-- Other filters (writer, genre, publisher) can be retained if needed -->
+        <!-- Genre filter -->
+        <div class="mb-3">
+            <label for="genre" class="form-label">Select genre:</label>
+            <select id="genre" name="genre[]" class="form-select">
+                <option value="">All Genres</option>
+                <option value="Action">Action</option>
+                <option value="Adventure">Adventure</option>
+                <option value="Coming-of-age">Coming-of-age</option>
+                <option value="Drama">Drama</option>
+                <option value="Fantasy">Fantasy</option>
+                <option value="Horror">Horror</option>
+                <option value="Mystery">Mystery</option>
+                <option value="Romance">Romance</option>
+                <option value="Seinen">Seinen</option>
+                <option value="Shounen">Shounen</option>
+                <option value="Sports">Sports</option>
+            </select>
+        </div>
+
+        <!-- Publisher filter -->
+        <div class="mb-3">
+            <label for="publisher" class="form-label">Select publisher:</label>
+            <select id="publisher" name="publisher[]" class="form-select">
+                <option value="">All Publishers</option>
+                <option value="Viz">Viz</option>
+                <option value="Yen Press">Yen Press</option>
+                <option value="Kodansha">Kodansha</option>
+                <option value="Dark Horse">Dark Horse</option>
+                <option value="TOKYOPOP">TOKYOPOP</option>
+            </select>
+        </div>
+    </fieldset>
+
+    <div class="mb-3">
+    <label for="writer" class="form-label">Select writer:</label>
+    <select id="writer" name="writer-search" class="form-select">
+        <option value="">All Writers</option>
+        <option value="Yoshihiro Togashi">Yoshihiro Togashi</option>
+        <option value="Junji Ito">Junji Ito</option>
+        <option value="Tatsuki Fujimoto">Tatsuki Fujimoto</option>
+        <option value="Naoki Urasawa">Naoki Urasawa</option>
+    </select>
+</div>
 
         <!-- Submit -->
         <div class="mb-3">

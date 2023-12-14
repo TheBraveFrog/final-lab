@@ -23,14 +23,8 @@ session_start();
     <header class="text-center">
         <nav class="mb-5">
             <ul class="nav me-auto">
-                    <a class="btn btn-primary" href="index.php">Back to Home</a>
+                <li class="nav-item"><a class="btn btn-primary" href="index.php">Back to Home</a></li>
                 <li class="nav-item"><a href="browse.php" class="nav-link link-light link-body-emphasis px-2">Search</a></li>
-                <li class="nav-item"><a href="#" class="nav-link link-light link-body-emphasis px-2">Browse by: </a>
-                </li>
-                <li class="nav-item"><a href="publisher-filter.php"
-                        class="nav-link link-light link-body-emphasis px-2">Browse By Publisher</a></li>
-                <li class="nav-item"><a href="genre-filter.php"
-                        class="nav-link link-light link-body-emphasis px-2">Browse By Genre</a></li>
             </ul>
 
 
